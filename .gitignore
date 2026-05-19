@@ -1,0 +1,95 @@
+# === Médias exclus du dépôt ===
+
+# Images
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.tif
+*.webp
+*.svg
+*.ico
+*.heic
+*.heif
+*.raw
+*.psd
+*.ai
+
+# PDF
+*.pdf
+
+# Vidéos
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wmv
+*.flv
+*.webm
+*.m4v
+*.mpg
+*.mpeg
+*.3gp
+
+# Archives
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+*.bz2
+*.xz
+*.iso
+
+# Musique / audio
+*.mp3
+*.wav
+*.flac
+*.aac
+*.ogg
+*.wma
+*.m4a
+*.opus
+*.aiff
+*.alac
+*.mid
+*.midi
+
+# Ebooks
+*.epub
+*.mobi
+*.azw
+*.azw3
+*.kfx
+*.fb2
+*.lit
+*.lrf
+*.djvu
+*.cbr
+*.cbz
+
+# Dossier média complet
+Musique/
+images/
+
+# === Profondeur max 1 niveau ===
+# Tout sous-dossier au-delà du 1er niveau de sous-dossier ignoré.
+*/*/*/
+
+# === Système / éditeurs ===
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.log
+node_modules/
+__pycache__/
+*.pyc
