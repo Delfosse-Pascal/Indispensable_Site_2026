@@ -1,5 +1,5 @@
-$dir = "J:\Indispensable_Site_2026\Programmes_Crack"
-$files = Get-ChildItem -Path $dir -File
+$dir = "J:\Indispensable_Site_2026\Programmes"
+$files = Get-ChildItem -Path $dir -File | Where-Object { $_.Extension -notin '.html','.ps1' }
 
 function NormKey($name) {
     $n = [System.IO.Path]::GetFileNameWithoutExtension($name).ToLower()
@@ -27,7 +27,7 @@ foreach ($f in $files) {
     if (-not $byKey[$k].display) { $byKey[$k].display = $disp }
     if ($f.Extension -in '.jpg','.jpeg','.png','.gif','.webp','.svg') {
         $byKey[$k].image = $f.Name; $byKey[$k].imgSz = $f.Length
-    } elseif ($f.Extension -in '.rar','.zip','.iso','.7z') {
+    } elseif ($f.Extension -in '.rar','.zip','.iso','.7z','.tar','.exe') {
         $byKey[$k].archive = $f.Name; $byKey[$k].arcSz = $f.Length
     }
 }
@@ -38,7 +38,28 @@ $totalPages = [math]::Ceiling($keys.Count / $perPage)
 
 Write-Output "Total: $($keys.Count) entries / $totalPages pages"
 
-# Template parts
+# Remove old pages
+Get-ChildItem -Path $dir -Filter "page-*.html" | Remove-Item -Force
+$idx = Join-Path $dir "index.html"
+if (Test-Path $idx) { Remove-Item -Force $idx }
+
+# Generate JSON catalog for search
+$catalog = @()
+foreach ($k in $keys) {
+    $v = $byKey[$k]
+    $catalog += @{
+        title = $v.display
+        image = $v.image
+        archive = $v.archive
+        imgSz = $v.imgSz
+        arcSz = $v.arcSz
+        key = $k
+    }
+}
+$catJson = $catalog | ConvertTo-Json -Compress -Depth 5
+$catJson | Set-Content -Path (Join-Path $dir "catalog.json") -Encoding UTF8
+Write-Output "Catalog: $($catalog.Count) entries"
+
 $head = @'
 <!DOCTYPE html>
 <html lang="fr">
@@ -119,12 +140,32 @@ $head = @'
   .card-crk .meta b { color: var(--accent-dark); }
   [data-theme="dark"] .card-crk .meta b { color: var(--accent-light); }
   .card-crk .btn { font-size: 0.9rem; padding: 0.4rem 0.9rem; }
+  .search-box {
+    max-width: 600px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+  }
+  .search-box input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-family: inherit;
+    font-size: 1.2rem;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    box-shadow: 0 3px 8px var(--shadow);
+  }
+  .search-box input:focus {
+    outline: 3px solid var(--accent-light);
+  }
+  .hidden { display: none !important; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Programmes &amp; Crack — Page {PAGENUM} / {TOTAL}</h1>
+  <h1>Programmes - Page {PAGENUM} / {TOTAL}</h1>
   <nav class="social-menu" aria-label="Liens sociaux">
     <ul>
       <li><a href="https://fr.pinterest.com/pascal509/mes-tableaux-tous-genre/" target="_blank" rel="noopener">Pinterest</a></li>
@@ -138,14 +179,18 @@ $head = @'
 
 <main>
   <section class="context">
-    <p><strong>Programmes &amp; Crack — page {PAGENUM} sur {TOTAL}.</strong> Catalogue local de logiciels, utilitaires et activateurs avec aperçus visuels.</p>
-    <p style="margin-top:0.6rem">Cliquez sur une image pour l'afficher en grand. <kbd>Échap</kbd> pour fermer. Boutons "Télécharger" pour récupérer les archives.</p>
-    <p style="margin-top:0.6rem">Tous les sous-dossiers de profondeur supérieure à 1 niveau sont ignorés (politique d'arborescence simple).</p>
+    <p><strong>Programmes - page {PAGENUM} sur {TOTAL}.</strong> Catalogue local de logiciels, utilitaires, scripts web, activateurs avec apercus visuels et archives telechargeables.</p>
+    <p style="margin-top:0.6rem">Cliquez sur une image pour l'afficher en grand. <kbd>Echap</kbd> pour fermer. Bouton "Telecharger" pour recuperer les archives.</p>
+    <p style="margin-top:0.6rem">Utilisez la barre de recherche ci-dessous pour filtrer sur cette page.</p>
   </section>
+
+  <div class="search-box">
+    <input type="search" id="local-search" placeholder="Rechercher dans cette page..." autocomplete="off">
+  </div>
 
   {PAGINATION}
 
-  <section class="crack-grid">
+  <section class="crack-grid" id="grid">
 '@
 
 $foot = @'
@@ -154,16 +199,33 @@ $foot = @'
   {PAGINATION}
 
   <section class="context" style="border-left-color: var(--accent-light)">
-    <h2>Sauvegarder &amp; installer</h2>
-    <p><strong>Aperçu :</strong> clic droit sur l'image &raquo; "Enregistrer l'image sous..." pour conserver la capture.</p>
-    <p><strong>Archive :</strong> bouton "Télécharger" ou clic droit &raquo; "Enregistrer la cible sous...". Décompression avec 7-Zip / WinRAR.</p>
-    <p><strong>Installation :</strong> exécutez le <code>Setup.exe</code> ou l'installateur fourni. Les notes d'utilisation et clés d'activation se trouvent généralement dans un fichier <code>Readme.txt</code> ou <code>Crack/</code> à l'intérieur de l'archive.</p>
+    <h2>Sauvegarder & installer</h2>
+    <p><strong>Apercu :</strong> clic droit sur l'image &raquo; "Enregistrer l'image sous..." pour conserver la capture.</p>
+    <p><strong>Archive :</strong> bouton "Telecharger" ou clic droit &raquo; "Enregistrer la cible sous...". Decompression avec 7-Zip / WinRAR.</p>
+    <p><strong>Installation :</strong> executez le <code>Setup.exe</code> ou l'installateur fourni. Notes et cles dans <code>Readme.txt</code> ou dossier <code>Crack/</code>.</p>
+    <p><strong>Curseurs :</strong> Panneau de configuration &raquo; Souris &raquo; Pointeurs &raquo; Parcourir le fichier .cur/.ani.</p>
   </section>
 </main>
 
 <footer>
-  <p>Indispensable Site 2026 — Programmes &amp; Crack page {PAGENUM}/{TOTAL} &middot; <a href="../index.html">Accueil</a></p>
+  <p>Indispensable Site 2026 - Programmes page {PAGENUM}/{TOTAL} &middot; <a href="../index.html">Accueil</a></p>
 </footer>
+
+<script>
+  // Filtre de recherche local
+  (function() {
+    var input = document.getElementById('local-search');
+    var grid = document.getElementById('grid');
+    if (!input || !grid) return;
+    input.addEventListener('input', function() {
+      var q = input.value.trim().toLowerCase();
+      grid.querySelectorAll('.card-crk').forEach(function(c) {
+        var t = (c.querySelector('h3')?.textContent || '').toLowerCase();
+        c.classList.toggle('hidden', q && t.indexOf(q) === -1);
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>
@@ -175,15 +237,27 @@ function BuildPagination($current, $total) {
     if ($current -gt 1) {
         $prev = $current - 1
         $href = if ($prev -eq 1) { 'index.html' } else { ('page-{0:D2}.html' -f $prev) }
-        [void]$sb.AppendLine("  <a href=`"$href`">&laquo; Précédent</a>")
+        [void]$sb.AppendLine("  <a href=`"$href`">&laquo; Precedent</a>")
     }
-    for ($i = 1; $i -le $total; $i++) {
+    # Show first, last, current +- 3
+    $shown = New-Object System.Collections.Generic.HashSet[int]
+    [void]$shown.Add(1); [void]$shown.Add($total)
+    for ($i = [math]::Max(1, $current-3); $i -le [math]::Min($total, $current+3); $i++) {
+        [void]$shown.Add($i)
+    }
+    $sortedShown = $shown | Sort-Object
+    $prev = 0
+    foreach ($i in $sortedShown) {
+        if ($prev -gt 0 -and $i - $prev -gt 1) {
+            [void]$sb.AppendLine('  <span>...</span>')
+        }
         $href = if ($i -eq 1) { 'index.html' } else { ('page-{0:D2}.html' -f $i) }
         if ($i -eq $current) {
             [void]$sb.AppendLine("  <span class=`"current`">$i</span>")
         } else {
             [void]$sb.AppendLine("  <a href=`"$href`">$i</a>")
         }
+        $prev = $i
     }
     if ($current -lt $total) {
         $next = $current + 1
@@ -222,13 +296,13 @@ for ($p = 1; $p -le $totalPages; $p++) {
         if ($arc) {
             $sizeStr = if ($mbArc -ge 1) { "$mbArc Mo" } else { "$kbArc Ko" }
             [void]$cards.AppendLine("      <p class=`"meta`"><b>ARC</b> $arcHtml<br>$sizeStr</p>")
-            [void]$cards.AppendLine("      <p><a class=`"btn`" href=`"$arcEnc`" download>Télécharger</a></p>")
+            [void]$cards.AppendLine("      <p><a class=`"btn`" href=`"$arcEnc`" download>Telecharger</a></p>")
         }
         [void]$cards.AppendLine('    </article>')
     }
 
     $pagination = BuildPagination $p $totalPages
-    $page = $head -replace '\{TITLE\}',"Programmes Crack - Page $p" `
+    $page = $head -replace '\{TITLE\}',"Programmes - Page $p" `
                   -replace '\{PAGENUM\}',$p `
                   -replace '\{TOTAL\}',$totalPages `
                   -replace '\{PAGINATION\}',$pagination

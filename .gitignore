@@ -83,13 +83,14 @@ winrar*
 *.cbr
 *.cbz
 
-# Dossier média complet (médias ignorés, HTML conservé)
+# Dossiers contenu (médias/archives ignorés, HTML + catalog conservés)
 Musique/*
-!Musique/index.html
 !Musique/*.html
 images/*
-!images/index.html
 !images/*.html
+Programmes/*
+!Programmes/*.html
+!Programmes/catalog.json
 
 # === Profondeur max 1 niveau ===
 # Tout sous-dossier au-delà du 1er niveau de sous-dossier ignoré.

@@ -1,18 +1,14 @@
 /* ============================================
-   Indispensable_Site_2026 — Injection header
+   Indispensable_Site_2026 - Injection header
    ============================================ */
 
 (function() {
   'use strict';
 
   function detectRoot() {
-    // Détection profondeur pour résoudre le chemin vers la racine
     const path = window.location.pathname.replace(/\\/g, '/');
-    const parts = path.split('/').filter(p => p && !p.endsWith('.html'));
-    // Si on est dans un sous-dossier, ajouter ../ pour chaque niveau
     let prefix = '';
-    // Détecte sous-dossier en regardant l'URL relative
-    if (path.includes('/Musique/') || path.includes('/Web_Programmes/') || path.includes('/Programmes_Crack/')) {
+    if (path.includes('/Musique/') || path.includes('/Programmes/')) {
       prefix = '../';
     }
     return prefix;
@@ -23,19 +19,25 @@
     if (!header || header.hasAttribute('data-no-inject')) return;
     const prefix = detectRoot();
 
-    // Conserve enfants existants, ajoute toolbar standard
-    const toolbar = document.createElement('div');
-    toolbar.className = 'toolbar';
-    toolbar.innerHTML = `
-      <a class="btn btn-home" href="${prefix}index.html">Retour à l'accueil</a>
-      <button class="btn theme-toggle" type="button" onclick="toggleTheme()">Mode sombre</button>
+    const row = document.createElement('div');
+    row.className = 'actions-row';
+    row.innerHTML = `
+      <a class="btn btn-home" href="${prefix}index.html">Retour a l'accueil</a>
+      <button class="btn-multi" type="button" onclick="toggleTheme()" id="btn-theme">
+        <span class="icon">&#9728;</span><span>Mode sombre</span>
+      </button>
+      <button class="btn-multi" type="button" onclick="openSearch()">
+        <span class="icon">&#128270;</span><span>Recherche</span>
+      </button>
+      <a class="btn-multi" href="${prefix}Musique/index.html" target="_blank" rel="noopener">
+        <span class="icon">&#9835;</span><span>Musiques</span>
+      </a>
     `;
-    header.appendChild(toolbar);
+    header.appendChild(row);
 
-    // Met le label du bouton à jour
     const saved = (function(){ try { return localStorage.getItem('theme'); } catch(e){ return null; } })();
     if (saved === 'dark') {
-      const btn = toolbar.querySelector('.theme-toggle');
+      const btn = row.querySelector('#btn-theme span:last-child');
       if (btn) btn.textContent = 'Mode clair';
     }
   });
