@@ -113,6 +113,49 @@
     if (panel) panel.classList.toggle('open');
   };
 
+  // ---- Fenetre musique persistante ----
+  // Ouvre une fenetre nommee unique pour la page Musique.
+  // Si la fenetre existe deja, on la focus sans la recharger
+  // (la musique continue de jouer).
+  function getMusiquePath() {
+    const path = window.location.pathname.replace(/\\/g, '/');
+    if (path.includes('/Musique/')) return 'index.html';
+    if (path.includes('/Programmes/')) return '../Musique/index.html';
+    return 'Musique/index.html';
+  }
+
+  window.openMusicWindow = function() {
+    const name = 'IndispensableMusique';
+    const features = 'width=520,height=760,toolbar=no,menubar=no,location=no,status=no,resizable=yes,scrollbars=yes';
+    // Etape 1: ouvrir avec URL vide pour recuperer la reference sans recharger
+    let w;
+    try {
+      w = window.open('', name, features);
+    } catch(e) {
+      w = null;
+    }
+    if (!w) {
+      // Popup bloque, fallback nouvelle fenetre
+      window.open(getMusiquePath(), name, features);
+      return;
+    }
+    // Etape 2: detecter si fenetre existante (a deja une URL chargee)
+    let needsLoad = true;
+    try {
+      const href = w.location.href;
+      if (href && href !== 'about:blank' && href !== '') {
+        needsLoad = false;
+      }
+    } catch(e) {
+      // Cross-origin ou autre: assume existante
+      needsLoad = false;
+    }
+    if (needsLoad) {
+      try { w.location.href = getMusiquePath(); } catch(e) {}
+    }
+    try { w.focus(); } catch(e) {}
+  };
+
   // ---- Global search overlay ----
   let catalog = null;
   function ensureSearchOverlay() {

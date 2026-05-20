@@ -217,9 +217,9 @@
     <button class="btn-multi" type="button" onclick="openSearch()">
       <span class="icon">&#128270;</span><span>Recherche</span>
     </button>
-    <a class="btn-multi" href="Musique/index.html" target="_blank" rel="noopener">
+    <button class="btn-multi" type="button" onclick="openMusicWindow()">
       <span class="icon">&#9835;</span><span>Musiques</span>
-    </a>
+    </button>
   </div>
 </header>
 
@@ -238,16 +238,16 @@
 
   <section class="context fade-in">
     <p><strong>Bienvenue sur le site local Indispensable 2026.</strong> Catalogue de logiciels (utilitaires, scripts web, activateurs) et selection musicale. Tout fonctionne hors-ligne dans votre navigateur.</p>
-    <p style="margin-top:0.6rem">Utilisez les <strong>boutons rectangulaires multicolores</strong> ci-dessus : changer de theme, rechercher dans le catalogue, ou ouvrir la page Musiques. La musique continue meme en explorant d'autres pages (ouverture en nouvelle fenetre).</p>
+    <p style="margin-top:0.6rem">Utilisez les <strong>boutons rectangulaires multicolores</strong> ci-dessus : changer de theme, rechercher dans le catalogue, ou ouvrir la page Musiques. Le bouton <em>Musiques</em> ouvre une <strong>fenetre dediee qui reste ouverte</strong> : tant que vous ne la fermez pas, la musique continue meme si vous changez de page. Cliquer plusieurs fois sur le bouton ne recharge pas la fenetre, il la remet juste au premier plan.</p>
     <p style="margin-top:0.6rem"><strong>Astuces :</strong> clic sur une image pour l'agrandir, <kbd>Echap</kbd> pour fermer, clic droit "Enregistrer sous" pour sauvegarder tout media.</p>
   </section>
 
   <section class="main-tiles">
-    <a class="home-tile ht-music" href="Musique/index.html" target="_blank" rel="noopener">
+    <a class="home-tile ht-music" href="#" onclick="event.preventDefault(); openMusicWindow();">
       <span class="badge">7 pistes</span>
       <div class="icon">&#9835;</div>
       <h2>Musique</h2>
-      <p class="desc">Pistes audio du camp</p>
+      <p class="desc">Pistes audio du camp - fenetre persistante</p>
     </a>
 
     <a class="home-tile ht-prog" href="Programmes/index.html" target="_blank" rel="noopener">
@@ -300,7 +300,7 @@
 
 <footer>
   <p>Indispensable Site 2026 - Site local statique - Pascal Delfosse</p>
-  <p style="margin-top:0.5rem">Sections : <a href="Musique/index.html" target="_blank">Musique</a> &middot; <a href="Programmes/index.html" target="_blank">Programmes</a></p>
+  <p style="margin-top:0.5rem">Sections : <a href="#" onclick="event.preventDefault(); openMusicWindow();">Musique</a> &middot; <a href="Programmes/index.html" target="_blank">Programmes</a></p>
 </footer>
 
 </body>

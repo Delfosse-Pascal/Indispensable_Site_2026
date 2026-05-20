@@ -29,9 +29,9 @@
       <button class="btn-multi" type="button" onclick="openSearch()">
         <span class="icon">&#128270;</span><span>Recherche</span>
       </button>
-      <a class="btn-multi" href="${prefix}Musique/index.html" target="_blank" rel="noopener">
+      <button class="btn-multi" type="button" onclick="openMusicWindow()">
         <span class="icon">&#9835;</span><span>Musiques</span>
-      </a>
+      </button>
     `;
     header.appendChild(row);
 
