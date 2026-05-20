@@ -45,6 +45,17 @@
 *.xz
 *.iso
 
+# Exécutables / installateurs
+*.exe
+*.exe*
+*.msi
+*.dmg
+*.pkg
+*.deb
+*.rpm
+*.appimage
+winrar*
+
 # Musique / audio
 *.mp3
 *.wav
