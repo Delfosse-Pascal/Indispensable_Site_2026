@@ -1,0 +1,653 @@
+/* ============================================
+   Indispensable_Site_2026 — Thème militaire/camo
+   Couleurs: olive, kaki, noir, sable
+   ============================================ */
+
+:root {
+  /* Palette claire (sable) */
+  --bg-primary: #d2b48c;
+  --bg-secondary: #e8d4a8;
+  --bg-card: #f0e2c4;
+  --text-primary: #2b2a1f;
+  --text-secondary: #4a4631;
+  --accent: #556b2f;
+  --accent-light: #8b9a4f;
+  --accent-dark: #3d4f1e;
+  --border: #8b7355;
+  --shadow: rgba(43, 42, 31, 0.25);
+  --metal-light: #b8b094;
+  --metal-dark: #6b5d3f;
+}
+
+[data-theme="dark"] {
+  /* Palette sombre (nuit/olive) */
+  --bg-primary: #1a1a0f;
+  --bg-secondary: #252518;
+  --bg-card: #2e2e1c;
+  --text-primary: #e8d4a8;
+  --text-secondary: #c2b896;
+  --accent: #8b9a4f;
+  --accent-light: #a8b66a;
+  --accent-dark: #556b2f;
+  --border: #4a4631;
+  --shadow: rgba(0, 0, 0, 0.6);
+  --metal-light: #4a4631;
+  --metal-dark: #1f1e10;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Brush Script MT', 'Lucida Handwriting', 'Segoe Script',
+               'Apple Chancery', 'Dancing Script', cursive, serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* Motif camouflage de fond */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.18;
+  background-image:
+    radial-gradient(ellipse 80px 50px at 20% 30%, var(--accent-dark) 40%, transparent 50%),
+    radial-gradient(ellipse 60px 90px at 70% 60%, var(--accent) 40%, transparent 50%),
+    radial-gradient(ellipse 100px 70px at 40% 80%, var(--metal-dark) 40%, transparent 50%),
+    radial-gradient(ellipse 50px 50px at 85% 20%, var(--accent-light) 40%, transparent 50%),
+    radial-gradient(ellipse 70px 40px at 10% 70%, var(--accent-dark) 40%, transparent 50%);
+  background-size: 400px 400px;
+  background-repeat: repeat;
+  animation: bgshift 60s linear infinite;
+}
+
+@keyframes bgshift {
+  from { background-position: 0 0; }
+  to   { background-position: 400px 400px; }
+}
+
+/* Grille tactique en superposition */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image:
+    linear-gradient(to right, var(--text-primary) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--text-primary) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ============================================
+   Header / Menu social — toujours centré, top
+   ============================================ */
+header,
+.app-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(180deg,
+    var(--bg-secondary) 0%,
+    rgba(0,0,0,0.05) 100%);
+  border-bottom: 3px double var(--border);
+  backdrop-filter: blur(4px);
+}
+
+.social-menu {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0.5rem 0;
+  z-index: 101;
+  position: sticky;
+  top: 0;
+}
+
+.social-menu ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0.5rem 1rem;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 30px;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.social-menu a {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--accent);
+  border-radius: 20px;
+  font-size: 1rem;
+  transition: all 0.25s;
+  font-weight: bold;
+}
+
+.social-menu a:hover {
+  background: var(--accent);
+  color: var(--bg-card);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow);
+}
+
+/* ============================================
+   Boutons & contrôles
+   ============================================ */
+.toolbar {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border: 2px solid var(--accent-dark);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 3px 6px var(--shadow);
+}
+
+.btn:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px var(--shadow);
+}
+
+.btn-home {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+}
+
+.theme-toggle {
+  background: var(--metal-dark);
+  color: var(--text-primary);
+  border-color: var(--metal-light);
+}
+
+/* ============================================
+   Titres
+   ============================================ */
+h1, h2, h3 {
+  font-family: 'Brush Script MT', 'Lucida Handwriting', 'Segoe Script', cursive;
+  color: var(--accent-dark);
+  text-shadow: 2px 2px 4px var(--shadow);
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3 {
+  color: var(--accent-light);
+}
+
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin: 1rem 0;
+  letter-spacing: 2px;
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin: 1.5rem 0 1rem;
+  border-left: 6px solid var(--accent);
+  padding-left: 1rem;
+}
+
+.context {
+  max-width: 900px;
+  margin: 1.5rem auto;
+  padding: 1.5rem 2rem;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-left: 8px solid var(--accent);
+  border-radius: 4px;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px var(--shadow);
+  position: relative;
+}
+
+.context::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    repeating-linear-gradient(45deg,
+      transparent 0, transparent 10px,
+      rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 11px);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ============================================
+   Galerie d'images
+   ============================================ */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.gallery-item {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem;
+  box-shadow: 0 3px 8px var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-item::before {
+  content: "";
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  border: 2px dashed transparent;
+  pointer-events: none;
+  transition: border-color 0.3s;
+  border-radius: inherit;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px var(--shadow);
+}
+
+.gallery-item:hover::before {
+  border-color: var(--accent);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background:
+    repeating-linear-gradient(45deg,
+      var(--metal-light), var(--metal-light) 8px,
+      var(--metal-dark) 8px, var(--metal-dark) 16px);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+
+.gallery-item .meta {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-family: 'Consolas', 'Courier New', monospace;
+}
+
+.gallery-item .title {
+  font-weight: bold;
+  color: var(--text-primary);
+  margin: 0.3rem 0;
+  font-size: 1rem;
+  word-break: break-word;
+  font-family: inherit;
+}
+
+/* ============================================
+   Lightbox
+   ============================================ */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  cursor: zoom-out;
+  flex-direction: column;
+}
+
+.lightbox.open { display: flex; }
+
+.lightbox img {
+  max-width: 95vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 40px var(--accent);
+  animation: lbpop 0.3s ease;
+}
+
+.lightbox .lb-info {
+  margin-top: 1rem;
+  color: #fff;
+  font-family: 'Consolas', monospace;
+  font-size: 1rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+}
+
+.lightbox .lb-close {
+  position: fixed;
+  top: 1.5rem;
+  right: 2rem;
+  background: var(--accent-dark);
+  color: #fff;
+  border: 2px solid var(--accent-light);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+@keyframes lbpop {
+  from { transform: scale(0.6); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* ============================================
+   Tuiles miniatures (accueil)
+   ============================================ */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+.tile {
+  display: block;
+  text-decoration: none;
+  color: var(--text-primary);
+  padding: 2rem;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  box-shadow: 0 6px 16px var(--shadow);
+  transition: all 0.35s;
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.tile.round    { border-radius: 50%; aspect-ratio: 1; }
+.tile.rect     { border-radius: 12px; }
+.tile.square   { border-radius: 0; aspect-ratio: 1; }
+.tile.tag      { border-radius: 8px 40px 8px 40px; }
+.tile.diamond  { border-radius: 4px; transform: rotate(2deg); }
+
+.tile:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 12px 28px var(--shadow);
+  border-color: var(--accent);
+}
+
+.tile::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed var(--accent);
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.tile-icon {
+  font-size: 3rem;
+  margin-bottom: 0.8rem;
+  filter: drop-shadow(2px 2px 4px var(--shadow));
+}
+
+.tile-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--accent-dark);
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+}
+
+[data-theme="dark"] .tile-title { color: var(--accent-light); }
+
+.tile-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Couleurs variées par tuile */
+.tile.t1 { background: linear-gradient(135deg, #d2b48c, #b8a070); }
+.tile.t2 { background: linear-gradient(135deg, #8b9a4f, #6b7a3f); }
+.tile.t3 { background: linear-gradient(135deg, #4a4631, #2e2e1c); color: #e8d4a8; }
+.tile.t3 .tile-title { color: #c2b896; }
+.tile.t4 { background: linear-gradient(135deg, #b8b094, #8b7355); }
+.tile.t5 { background: linear-gradient(135deg, #556b2f, #3d4f1e); color: #e8d4a8; }
+.tile.t5 .tile-title { color: #c2b896; }
+
+/* ============================================
+   Lecteur audio sticky (accueil)
+   ============================================ */
+.audio-launcher {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 500;
+}
+
+.audio-toggle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  cursor: pointer;
+  background: conic-gradient(
+    #ff4d6d 0deg 60deg,
+    #ffaa00 60deg 120deg,
+    #ffe600 120deg 180deg,
+    #4cd964 180deg 240deg,
+    #4d9aff 240deg 300deg,
+    #b04dff 300deg 360deg);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5),
+              inset 0 0 0 4px rgba(0,0,0,0.15);
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+  transition: transform 0.25s;
+}
+
+.audio-toggle:hover { transform: scale(1.1) rotate(15deg); }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 0 0 0 var(--accent); }
+  50%      { box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 0 0 12px transparent; }
+}
+
+.audio-panel {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
+  width: 320px;
+  background: var(--bg-card);
+  border: 3px solid var(--accent);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 8px 24px var(--shadow);
+  display: none;
+  z-index: 499;
+}
+
+.audio-panel.open { display: block; animation: slideup 0.35s ease; }
+
+@keyframes slideup {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.audio-panel h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.audio-panel audio {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.audio-tracks {
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 0.5rem;
+}
+
+.audio-tracks li {
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.95rem;
+}
+
+.audio-tracks li:hover,
+.audio-tracks li.active { background: var(--accent); color: #fff; }
+
+/* ============================================
+   Pagination
+   ============================================ */
+.pagination {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  max-width: 1200px;
+}
+
+.pagination a, .pagination span {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text-primary);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.pagination a:hover { background: var(--accent); color: #fff; }
+.pagination .current {
+  background: var(--accent-dark);
+  color: #fff;
+  border-color: var(--accent-light);
+  font-weight: bold;
+}
+
+/* ============================================
+   Plaque métallique (cartouche)
+   ============================================ */
+.plate {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(135deg, var(--metal-light), var(--metal-dark));
+  color: #fff;
+  border: 2px solid var(--metal-dark);
+  border-radius: 4px;
+  font-family: 'Consolas', monospace;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3),
+              0 2px 4px var(--shadow);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+  background: var(--bg-secondary);
+  border-top: 3px double var(--border);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 600px) {
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.6rem; }
+  .social-menu ul { gap: 0.3rem; padding: 0.4rem; }
+  .social-menu a { padding: 0.3rem 0.7rem; font-size: 0.85rem; }
+  .tiles { padding: 0 1rem; gap: 1rem; }
+  .tile { padding: 1rem; min-height: 160px; }
+  .gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.8rem; }
+  .audio-panel { width: 90vw; right: 1rem; }
+}
+
+/* Animation d'apparition */
+.fade-in {
+  animation: fadein 0.6s ease-out;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Curseur custom (hint UX) */
+a, button, .gallery-item, .tile { cursor: pointer; }

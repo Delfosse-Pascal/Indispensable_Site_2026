@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Musique — Indispensable Site 2026</title>
+
+<link rel="canonical" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/">
+<link rel="icon" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/favicondepascal.png" type="image/png">
+<link rel="icon" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/favicondepascal.ico" type="image/x-icon">
+
+<!-- Ressources externes (n'empêchent pas le fonctionnement local) -->
+<link rel="stylesheet" type="text/css" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/style.css">
+<script src="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/script.js"></script>
+<script src="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/menu.js" defer></script>
+<link rel="stylesheet" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/basedusite.css">
+
+<!-- Ressources locales (garantissent le rendu) -->
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/script.js" defer></script>
+<script src="../assets/menu.js" defer></script>
+
+<style>
+  /* Mise en page spécifique Musique */
+  .audio-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  .audio-card {
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-left: 8px solid var(--accent);
+    border-radius: 6px;
+    padding: 1.2rem;
+    box-shadow: 0 4px 12px var(--shadow);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .audio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px var(--shadow);
+  }
+  .audio-card::before {
+    content: "♪";
+    position: absolute;
+    top: -10px; right: 10px;
+    font-size: 4rem;
+    color: var(--accent);
+    opacity: 0.15;
+    font-family: serif;
+  }
+  .audio-card h3 {
+    font-size: 1.4rem;
+    color: var(--accent-dark);
+    margin-bottom: 0.5rem;
+  }
+  [data-theme="dark"] .audio-card h3 { color: var(--accent-light); }
+  .audio-card .meta {
+    font-family: 'Consolas', monospace;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.8rem;
+  }
+  .audio-card audio {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  .waveform {
+    height: 30px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--accent), var(--accent) 2px,
+        transparent 2px, transparent 6px),
+      repeating-linear-gradient(90deg,
+        var(--accent-dark), var(--accent-dark) 1px,
+        transparent 1px, transparent 4px);
+    background-size: 6px 100%, 4px 70%;
+    background-repeat: repeat-x;
+    background-position: 0 50%;
+    opacity: 0.6;
+    margin: 0.5rem 0;
+    animation: wave 3s ease-in-out infinite;
+  }
+  @keyframes wave {
+    0%, 100% { background-size: 6px 100%, 4px 70%; }
+    50%      { background-size: 6px 60%, 4px 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Musique du Camp</h1>
+  <nav class="social-menu" aria-label="Liens sociaux">
+    <ul>
+      <li><a href="https://fr.pinterest.com/pascal509/mes-tableaux-tous-genre/" target="_blank" rel="noopener">Pinterest</a></li>
+      <li><a href="https://www.flickr.com/photos/delfossepascal" target="_blank" rel="noopener">Flickr</a></li>
+      <li><a href="https://www.tumblr.com/lestoilesdepascal" target="_blank" rel="noopener">Tumblr</a></li>
+      <li><a href="https://x.com/PascalDelfossee" target="_blank" rel="noopener">X</a></li>
+      <li><a href="https://www.youtube.com/c/DelfossePascal" target="_blank" rel="noopener">YouTube</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="context">
+    <p><strong>Bienvenue sur la page Musique.</strong> Ce dossier contient une sélection de pistes audio en format <code>.mp3</code>, disponibles localement pour écoute et téléchargement.</p>
+    <p style="margin-top:0.6rem">Pour télécharger une piste : <strong>clic droit sur le lecteur audio &raquo; "Enregistrer la musique sous..."</strong> ou utilisez le lien <em>"Télécharger"</em> sous chaque piste.</p>
+    <p style="margin-top:0.6rem">Astuce : si vous lancez la lecture depuis la page d'accueil, la musique continue même quand vous explorez les autres pages (qui s'ouvrent dans une nouvelle fenêtre).</p>
+  </section>
+
+  <div class="audio-list" id="audioList">
+    <div class="audio-card">
+      <h3>Piste 00</h3>
+      <div class="meta"><span class="plate">00.mp3</span> &nbsp; 4 400 Ko (~4,3 Mo)</div>
+      <div class="waveform"></div>
+      <audio controls preload="none" src="00.mp3"></audio>
+      <p><a href="00.mp3" download class="btn" style="margin-top:0.6rem; padding:0.3rem 0.9rem; font-size:0.95rem">Télécharger</a></p>
+    </div>
+
+    <div class="audio-card">
+      <h3>Piste 01</h3>
+      <div class="meta"><span class="plate">01.mp3</span> &nbsp; 2 240 Ko (~2,2 Mo)</div>
+      <div class="waveform"></div>
+      <audio controls preload="none" src="01.mp3"></audio>
+      <p><a href="01.mp3" download class="btn" style="margin-top:0.6rem; padding:0.3rem 0.9rem; font-size:0.95rem">Télécharger</a></p>
+    </div>
+
+    <div class="audio-card">
+      <h3>Piste 02</h3>
+      <div class="meta"><span class="plate">02.mp3</span> &nbsp; 14 958 Ko (~14,6 Mo)</div>
+      <div class="waveform"></div>
+      <audio controls preload="none" src="02.mp3"></audio>
+      <p><a href="02.mp3" download class="btn" style="margin-top:0.6rem; padding:0.3rem 0.9rem; font-size:0.95rem">Télécharger</a></p>
+    </div>
+
+    <div class="audio-card">
+      <h3>Piste 03</h3>
+      <div class="meta"><span class="plate">03.mp3</span> &nbsp; 740 Ko (~0,7 Mo)</div>
+      <div class="waveform"></div>
+      <audio controls preload="none" src="03.mp3"></audio>
+      <p><a href="03.mp3" download class="btn" style="margin-top:0.6rem; padding:0.3rem 0.9rem; font-size:0.95rem">Télécharger</a></p>
+    </div>
+
+    <div class="audio-card">
+      <h3>Piste 04</h3>
+      <div class="meta"><span class="plate">04.mp3</span> &nbsp; 11 020 Ko (~10,8 Mo)</div>
+      <div class="waveform"></div>
+      <audio controls preload="none" src="04.mp3"></audio>
+      <p><a href="04.mp3" download class="btn" style="margin-top:0.6rem; padding:0.3rem 0.9rem; font-size:0.95rem">Télécharger</a></p>
+    </div>
+
+    <div class="audio-card">
+      <h3>Piste 05</h3>
+      <div class="meta"><span class="plate">05.mp3</span> &nbsp; 8 633 Ko (~8,4 Mo)</div>
+      <div class="waveform"></div>
+      <audio controls preload="none" src="05.mp3"></audio>
+      <p><a href="05.mp3" download class="btn" style="margin-top:0.6rem; padding:0.3rem 0.9rem; font-size:0.95rem">Télécharger</a></p>
+    </div>
+
+    <div class="audio-card">
+      <h3>Piste 06</h3>
+      <div class="meta"><span class="plate">06.mp3</span> &nbsp; 7 883 Ko (~7,7 Mo)</div>
+      <div class="waveform"></div>
+      <audio controls preload="none" src="06.mp3"></audio>
+      <p><a href="06.mp3" download class="btn" style="margin-top:0.6rem; padding:0.3rem 0.9rem; font-size:0.95rem">Télécharger</a></p>
+    </div>
+  </div>
+
+  <section class="context" style="border-left-color: var(--accent-light)">
+    <h2>Comment télécharger ?</h2>
+    <ul style="margin-left:1.5rem">
+      <li><strong>Méthode 1 :</strong> clic droit sur le lecteur audio &raquo; <em>"Enregistrer l'audio sous..."</em></li>
+      <li><strong>Méthode 2 :</strong> bouton <em>"Télécharger"</em> sous chaque piste (force le téléchargement).</li>
+      <li><strong>Méthode 3 :</strong> clic droit sur le bouton <em>"Télécharger"</em> &raquo; <em>"Enregistrer la cible sous..."</em></li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <p>Indispensable Site 2026 — Section Musique &middot; <a href="../index.html">Accueil</a></p>
+</footer>
+
+</body>
+</html>

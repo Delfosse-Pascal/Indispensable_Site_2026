@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indispensable Site 2026 - Accueil</title>
+
+<link rel="canonical" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/">
+<link rel="icon" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/favicondepascal.png" type="image/png">
+<link rel="icon" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/favicondepascal.ico" type="image/x-icon">
+
+<link rel="stylesheet" type="text/css" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/style.css">
+<script src="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/script.js"></script>
+<script src="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/menu.js" defer></script>
+<link rel="stylesheet" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/basedusite.css">
+
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/script.js" defer></script>
+
+<style>
+  /* Mise en page accueil — différente */
+  .hero {
+    text-align: center;
+    padding: 3rem 1rem 1rem;
+    background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(85, 107, 47, 0.15) 100%);
+    position: relative;
+  }
+  .hero h1 {
+    font-size: 4rem;
+    margin: 1rem 0 0.5rem;
+    text-shadow: 3px 3px 6px var(--shadow);
+    animation: heropop 1s ease-out;
+  }
+  .hero .subtitle {
+    font-size: 1.4rem;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+  @keyframes heropop {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Carte cartographique */
+  .map-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.12;
+    background-image:
+      radial-gradient(circle at 20% 30%, var(--accent-dark) 0%, transparent 20%),
+      radial-gradient(circle at 75% 60%, var(--accent) 0%, transparent 25%),
+      radial-gradient(circle at 40% 85%, var(--metal-dark) 0%, transparent 18%),
+      linear-gradient(45deg, transparent 49%, var(--text-primary) 49%, var(--text-primary) 51%, transparent 51%),
+      linear-gradient(-45deg, transparent 49%, var(--text-primary) 49%, var(--text-primary) 51%, transparent 51%);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100px 100px, 100px 100px;
+  }
+
+  /* Stats compteur */
+  .stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+  .stat {
+    text-align: center;
+    background: var(--bg-card);
+    padding: 1rem 1.5rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 3px 8px var(--shadow);
+  }
+  .stat .num {
+    font-size: 2.5rem;
+    color: var(--accent-dark);
+    font-weight: bold;
+    display: block;
+  }
+  [data-theme="dark"] .stat .num { color: var(--accent-light); }
+  .stat .lbl {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+
+  /* Tuiles principales — formes variées */
+  .main-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    max-width: 1300px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+  }
+  .home-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    padding: 2.5rem 1.5rem;
+    border: 3px solid var(--border);
+    box-shadow: 0 6px 18px var(--shadow);
+    position: relative;
+    overflow: hidden;
+    min-height: 280px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    color: #fff;
+  }
+  .home-tile::before {
+    content: "";
+    position: absolute; inset: 8px;
+    border: 2px dashed rgba(255,255,255,0.4);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+  .home-tile:hover {
+    transform: translateY(-8px) rotate(-1deg) scale(1.03);
+    box-shadow: 0 14px 32px var(--shadow);
+  }
+  .home-tile .icon {
+    font-size: 4rem;
+    filter: drop-shadow(2px 2px 6px rgba(0,0,0,0.5));
+    margin-bottom: 0.8rem;
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+  .home-tile h2 {
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    border: none;
+    padding: 0;
+    margin: 0.5rem 0;
+  }
+  .home-tile .desc {
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    opacity: 0.95;
+  }
+  .home-tile .badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0,0,0,0.6);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-family: 'Consolas', monospace;
+  }
+
+  /* Couleurs/formes variées par tuile */
+  .ht-music {
+    background: linear-gradient(135deg, #b04dff 0%, #4d9aff 100%);
+    border-radius: 50%;
+    aspect-ratio: 1;
+  }
+  .ht-web {
+    background: linear-gradient(135deg, #8b9a4f 0%, #556b2f 100%);
+    border-radius: 16px;
+  }
+  .ht-crack {
+    background: linear-gradient(135deg, #4a4631 0%, #2e2e1c 100%);
+    border-radius: 4px 40px 4px 40px;
+  }
+  .ht-readme {
+    background: linear-gradient(135deg, #d2b48c 0%, #8b7355 100%);
+    border-radius: 0;
+    transform: rotate(2deg);
+  }
+  .ht-readme:hover { transform: translateY(-8px) rotate(0) scale(1.03); }
+
+  /* Cartes sous-pages Crack */
+  .crack-pages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 0.6rem;
+    max-width: 1100px;
+    margin: 1rem auto 2rem;
+    padding: 0 1rem;
+  }
+  .crack-pages-grid a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 0.4rem;
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.25s;
+  }
+  .crack-pages-grid a:hover {
+    background: var(--accent);
+    color: #fff;
+    transform: translateY(-3px);
+    border-color: var(--accent-dark);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 style="margin-bottom:0">Indispensable Site 2026</h1>
+  <nav class="social-menu" aria-label="Liens sociaux">
+    <ul>
+      <li><a href="https://fr.pinterest.com/pascal509/mes-tableaux-tous-genre/" target="_blank" rel="noopener">Pinterest</a></li>
+      <li><a href="https://www.flickr.com/photos/delfossepascal" target="_blank" rel="noopener">Flickr</a></li>
+      <li><a href="https://www.tumblr.com/lestoilesdepascal" target="_blank" rel="noopener">Tumblr</a></li>
+      <li><a href="https://x.com/PascalDelfossee" target="_blank" rel="noopener">X</a></li>
+      <li><a href="https://www.youtube.com/c/DelfossePascal" target="_blank" rel="noopener">YouTube</a></li>
+    </ul>
+  </nav>
+  <div class="toolbar">
+    <button class="btn theme-toggle" type="button" onclick="toggleTheme()">Mode sombre</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="map-bg"></div>
+    <p class="subtitle">Quartier general numerique - archives, logiciels, ressources</p>
+
+    <div class="stats">
+      <div class="stat"><span class="num">3</span><span class="lbl">Sections</span></div>
+      <div class="stat"><span class="num">751</span><span class="lbl">Programmes Crack</span></div>
+      <div class="stat"><span class="num">30</span><span class="lbl">Programmes Web</span></div>
+      <div class="stat"><span class="num">7</span><span class="lbl">Pistes audio</span></div>
+    </div>
+  </section>
+
+  <section class="context fade-in">
+    <p><strong>Bienvenue sur le site local Indispensable 2026.</strong> Trois sections principales rassemblent les ressources : musique d'ambiance, programmes web (boutons, bannieres, animations) et catalogue de logiciels et utilitaires.</p>
+    <p style="margin-top:0.6rem">Cliquez sur les tuiles ci-dessous pour explorer chaque section. Le bouton multicolore en bas a droite ouvre le lecteur audio (la musique continue meme en changeant de page).</p>
+    <p style="margin-top:0.6rem"><strong>Astuces :</strong> Echap ferme les apercus, clic droit "Enregistrer sous" pour sauvegarder n'importe quel media, le mode sombre/clair se memorise.</p>
+  </section>
+
+  <section class="main-tiles">
+    <a class="home-tile ht-music" href="Musique/index.html" target="_blank" rel="noopener">
+      <span class="badge">7 pistes</span>
+      <div class="icon">♪</div>
+      <h2>Musique</h2>
+      <p class="desc">Pistes audio du camp</p>
+    </a>
+
+    <a class="home-tile ht-web" href="Web_Programmes/index.html" target="_blank" rel="noopener">
+      <span class="badge">30 logiciels</span>
+      <div class="icon">&lt;/&gt;</div>
+      <h2>Programmes Web</h2>
+      <p class="desc">Outils webmaster, sliders, banniere, boutons</p>
+    </a>
+
+    <a class="home-tile ht-crack" href="Programmes_Crack/index.html" target="_blank" rel="noopener">
+      <span class="badge">13 pages</span>
+      <div class="icon">⚙</div>
+      <h2>Programmes Crack</h2>
+      <p class="desc">Catalogue de 751 logiciels actives</p>
+    </a>
+
+    <a class="home-tile ht-readme" href="README.md" target="_blank" rel="noopener">
+      <span class="badge">DOC</span>
+      <div class="icon">⌘</div>
+      <h2>Documentation</h2>
+      <p class="desc">Lire le README du projet</p>
+    </a>
+  </section>
+
+  <section class="context" style="border-left-color: var(--metal-light)">
+    <h2>Acces direct aux pages Crack</h2>
+    <p>Le catalogue de programmes Crack est decoupe en 13 pages de 60 logiciels.</p>
+    <div class="crack-pages-grid">
+      <a href="Programmes_Crack/index.html" target="_blank" rel="noopener">Page 1</a>
+      <a href="Programmes_Crack/page-02.html" target="_blank" rel="noopener">Page 2</a>
+      <a href="Programmes_Crack/page-03.html" target="_blank" rel="noopener">Page 3</a>
+      <a href="Programmes_Crack/page-04.html" target="_blank" rel="noopener">Page 4</a>
+      <a href="Programmes_Crack/page-05.html" target="_blank" rel="noopener">Page 5</a>
+      <a href="Programmes_Crack/page-06.html" target="_blank" rel="noopener">Page 6</a>
+      <a href="Programmes_Crack/page-07.html" target="_blank" rel="noopener">Page 7</a>
+      <a href="Programmes_Crack/page-08.html" target="_blank" rel="noopener">Page 8</a>
+      <a href="Programmes_Crack/page-09.html" target="_blank" rel="noopener">Page 9</a>
+      <a href="Programmes_Crack/page-10.html" target="_blank" rel="noopener">Page 10</a>
+      <a href="Programmes_Crack/page-11.html" target="_blank" rel="noopener">Page 11</a>
+      <a href="Programmes_Crack/page-12.html" target="_blank" rel="noopener">Page 12</a>
+      <a href="Programmes_Crack/page-13.html" target="_blank" rel="noopener">Page 13</a>
+    </div>
+  </section>
+
+  <section class="context" style="border-left-color: var(--accent)">
+    <h2>Aide rapide - Curseurs Windows</h2>
+    <ol style="margin-left:1.5rem">
+      <li>Decompressez l'archive de curseurs dans un dossier permanent (ex: <code>C:\Curseurs\</code>).</li>
+      <li>Ouvrez <strong>Panneau de configuration &raquo; Souris &raquo; onglet Pointeurs</strong>.</li>
+      <li>Selectionnez un pointeur, cliquez <em>"Parcourir..."</em>, choisissez le <code>.cur</code> ou <code>.ani</code> correspondant.</li>
+      <li>Cliquez <em>"Enregistrer sous..."</em> pour memoriser le jeu.</li>
+      <li>Validez avec <em>OK</em>.</li>
+    </ol>
+    <p style="margin-top:0.6rem"><strong>Clic droit "Enregistrer sous"</strong> fonctionne sur toutes les images et fichiers audio de ce site pour sauvegarder localement.</p>
+  </section>
+</main>
+
+<!-- Lecteur audio sticky multicouleur -->
+<div class="audio-launcher">
+  <button class="audio-toggle" type="button" onclick="toggleAudioPanel()" title="Lecteur audio" aria-label="Ouvrir le lecteur audio">♪</button>
+</div>
+<div class="audio-panel" id="audio-panel">
+  <h3>Musique du Camp</h3>
+  <p style="font-size:0.85rem; color: var(--text-secondary)">Cliquez sur une piste pour lancer la lecture. La musique continue meme si vous explorez d'autres pages (elles s'ouvrent dans une nouvelle fenetre).</p>
+  <audio id="bg-audio" controls></audio>
+  <ul class="audio-tracks" id="tracks">
+    <li data-src="Musique/00.mp3">Piste 00 (4,3 Mo)</li>
+    <li data-src="Musique/01.mp3">Piste 01 (2,2 Mo)</li>
+    <li data-src="Musique/02.mp3">Piste 02 (14,6 Mo)</li>
+    <li data-src="Musique/03.mp3">Piste 03 (0,7 Mo)</li>
+    <li data-src="Musique/04.mp3">Piste 04 (10,8 Mo)</li>
+    <li data-src="Musique/05.mp3">Piste 05 (8,4 Mo)</li>
+    <li data-src="Musique/06.mp3">Piste 06 (7,7 Mo)</li>
+  </ul>
+</div>
+
+<footer>
+  <p>Indispensable Site 2026 - Site local statique - Pascal Delfosse</p>
+  <p style="margin-top:0.5rem">Sections : <a href="Musique/index.html" target="_blank">Musique</a> &middot; <a href="Web_Programmes/index.html" target="_blank">Programmes Web</a> &middot; <a href="Programmes_Crack/index.html" target="_blank">Programmes Crack</a></p>
+</footer>
+
+<script>
+  // Audio launcher logic
+  (function() {
+    var audio = document.getElementById('bg-audio');
+    var tracks = document.getElementById('tracks');
+    if (!audio || !tracks) return;
+    tracks.querySelectorAll('li').forEach(function(li) {
+      li.addEventListener('click', function() {
+        tracks.querySelectorAll('li').forEach(function(x) { x.classList.remove('active'); });
+        li.classList.add('active');
+        audio.src = li.dataset.src;
+        audio.play().catch(function() {});
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
