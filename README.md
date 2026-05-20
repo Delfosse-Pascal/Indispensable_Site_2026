@@ -98,8 +98,15 @@ Indispensable_Site_2026/
 - **Forme d'onde animée** sur chaque carte.
 - **Bouton de téléchargement** sous chaque piste.
 - Instructions de sauvegarde (clic droit → "Enregistrer la musique sous...").
-- **Persistance** : la fenêtre Musique reste ouverte indépendamment des autres
-  pages, la lecture continue tant que la fenêtre n'est pas fermée.
+- **Persistance audio** : la fenêtre Musique est un popup nommé
+  (`IndispensableMusique`, 520×760 px). Tout clic suivant sur le bouton
+  *Musiques* depuis n'importe quelle autre page :
+  1. Récupère la référence au popup via `window.open('', 'IndispensableMusique')`.
+  2. Détecte qu'il est déjà chargé (URL non vide).
+  3. Appelle uniquement `.focus()` sans recharger l'URL.
+  
+  Résultat : la piste audio en cours **continue de jouer** sans interruption
+  même si vous naviguez entre l'accueil et les pages Programmes.
 
 ### Section Programmes (`Programmes/index.html` + `page-02.html` à `page-13.html`)
 
@@ -113,18 +120,34 @@ Indispensable_Site_2026/
 
 ### Recherche globale
 
-- **Overlay plein écran** déclenché par le bouton *Recherche*.
-- **Filtrage instantané** dans `catalog.js` (772 entrées indexées).
-- Résultats avec miniature et lien direct vers l'archive.
-- Maximum 100 résultats affichés.
-- Compatible `file://` (chargement par injection de `<script>`).
+- **Overlay plein écran** déclenché par le bouton *Recherche* (header).
+- **Filtrage instantané** sur le titre des entrées (`catalog.js`, 772 indexées).
+- Résultats avec miniature et lien direct vers l'archive ou l'image.
+- Maximum 100 résultats affichés (pour préserver les performances).
+- **Compatible `file://`** : le catalogue est chargé par **injection d'un
+  `<script>` dynamique** (et non `fetch()` qui est bloqué par CORS en
+  protocole `file://`). Le fichier `Programmes/catalog.js` expose
+  `window.INDISPO_CATALOG` lu directement par `script.js`.
+- **Touche `Échap`** ferme l'overlay.
 
-### Thème militaire / camouflage
+### Thème militaire / camouflage / futuriste
 
-- **Palette** : vert olive, kaki, noir, sable.
-- **Motifs** : taches camouflage, grille tactique, plaques métalliques, cartes.
-- **Police calligraphique** (Brush Script MT et alternatives système).
-- **Mode clair / sombre** sur toutes les pages, mémorisé par navigateur.
+- **Palette à fort contraste** : vert olive profond, kaki, noir, sable.
+  - Mode clair : texte `#0a0a05`, accent `#3d4f1e`, fond sable `#c9a86a`.
+  - Mode sombre : texte `#fff5d0`, accent `#b8c855`, fond quasi-noir `#08080a`.
+- **Motifs** : taches camouflage animées (défilement 60s), grille tactique,
+  plaques métalliques (gradients hachurés), cartes (radial gradients).
+- **Police futuriste sans-serif** :
+  ```
+  Bahnschrift / Bahnschrift Condensed / Eurostile / Bank Gothic /
+  Tw Cen MT Condensed / Impact / Arial Narrow / Helvetica Neue / system-ui
+  ```
+  - Native sous Windows 10/11 (Bahnschrift), fallbacks universels.
+  - Look militaire / tactique / sci-fi (condensé, géométrique).
+- **Typographie** : titres en `uppercase`, `font-weight: 800`,
+  `letter-spacing: 2px`. Boutons et liens sociaux idem.
+- **Mode clair / sombre** sur toutes les pages, choix mémorisé par navigateur
+  via `localStorage`.
 
 ---
 
@@ -235,8 +258,13 @@ Le script :
 
 - **Couleurs** : éditer les variables CSS dans `assets/style.css`
   (section `:root` pour le mode clair, `[data-theme="dark"]` pour le sombre).
-- **Police calligraphique** : variable `font-family` du `body` dans `style.css`.
-- **Motifs camouflage** : pseudo-éléments `body::before` et `body::after`.
+- **Police** : variable `font-family` du sélecteur `body` (et `h1, h2, h3`)
+  dans `style.css`. Empiler vos polices préférées en gardant des fallbacks
+  système pour rester fonctionnel hors-ligne.
+- **Motifs camouflage** : pseudo-éléments `body::before` (taches camo)
+  et `body::after` (grille tactique).
+- **Animations** : keyframes `bgshift`, `pulse`, `float`, `fadein`,
+  `rainbowShift`, `wave`, `heropop`, `lbpop`, `slideup`.
 
 ### Ajouter des liens sociaux
 
