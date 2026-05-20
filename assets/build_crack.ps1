@@ -58,7 +58,10 @@ foreach ($k in $keys) {
 }
 $catJson = $catalog | ConvertTo-Json -Compress -Depth 5
 $catJson | Set-Content -Path (Join-Path $dir "catalog.json") -Encoding UTF8
-Write-Output "Catalog: $($catalog.Count) entries"
+# Version JS pour fonctionnement en file:// (fetch JSON bloque par CORS sur file:)
+$catJs = "window.INDISPO_CATALOG = $catJson;"
+$catJs | Set-Content -Path (Join-Path $dir "catalog.js") -Encoding UTF8
+Write-Output "Catalog: $($catalog.Count) entries (catalog.json + catalog.js)"
 
 $head = @'
 <!DOCTYPE html>

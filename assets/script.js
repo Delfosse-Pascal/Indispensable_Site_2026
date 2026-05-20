@@ -179,11 +179,11 @@
     return ov;
   }
 
-  function getCatalogPath() {
+  function getCatalogJsPath() {
     const path = window.location.pathname.replace(/\\/g, '/');
-    if (path.includes('/Programmes/')) return 'catalog.json';
-    if (path.includes('/Musique/')) return '../Programmes/catalog.json';
-    return 'Programmes/catalog.json';
+    if (path.includes('/Programmes/')) return 'catalog.js';
+    if (path.includes('/Musique/')) return '../Programmes/catalog.js';
+    return 'Programmes/catalog.js';
   }
   function getProgrammesPrefix() {
     const path = window.location.pathname.replace(/\\/g, '/');
@@ -192,12 +192,26 @@
     return 'Programmes/';
   }
 
+  // Charge catalog.js via injection script (compatible file://)
   function loadCatalog() {
     if (catalog) return Promise.resolve(catalog);
-    return fetch(getCatalogPath())
-      .then(r => r.ok ? r.json() : [])
-      .then(data => { catalog = data; return data; })
-      .catch(() => { catalog = []; return []; });
+    if (window.INDISPO_CATALOG) {
+      catalog = window.INDISPO_CATALOG;
+      return Promise.resolve(catalog);
+    }
+    return new Promise((resolve) => {
+      const s = document.createElement('script');
+      s.src = getCatalogJsPath();
+      s.onload = () => {
+        catalog = window.INDISPO_CATALOG || [];
+        resolve(catalog);
+      };
+      s.onerror = () => {
+        catalog = [];
+        resolve(catalog);
+      };
+      document.head.appendChild(s);
+    });
   }
 
   function runSearch(q) {
