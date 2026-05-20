@@ -4,35 +4,35 @@
    ============================================ */
 
 :root {
-  /* Palette claire (sable) */
-  --bg-primary: #d2b48c;
+  /* Palette claire (sable) - contraste renforce */
+  --bg-primary: #c9a86a;
   --bg-secondary: #e8d4a8;
-  --bg-card: #f0e2c4;
-  --text-primary: #2b2a1f;
-  --text-secondary: #4a4631;
-  --accent: #556b2f;
-  --accent-light: #8b9a4f;
-  --accent-dark: #3d4f1e;
-  --border: #8b7355;
-  --shadow: rgba(43, 42, 31, 0.25);
+  --bg-card: #f5e8c8;
+  --text-primary: #0a0a05;
+  --text-secondary: #2b2a1f;
+  --accent: #3d4f1e;
+  --accent-light: #6b7a3f;
+  --accent-dark: #1f2810;
+  --border: #4a4631;
+  --shadow: rgba(0, 0, 0, 0.4);
   --metal-light: #b8b094;
-  --metal-dark: #6b5d3f;
+  --metal-dark: #4a4631;
 }
 
 [data-theme="dark"] {
-  /* Palette sombre (nuit/olive) */
-  --bg-primary: #1a1a0f;
-  --bg-secondary: #252518;
-  --bg-card: #2e2e1c;
-  --text-primary: #e8d4a8;
-  --text-secondary: #c2b896;
-  --accent: #8b9a4f;
-  --accent-light: #a8b66a;
-  --accent-dark: #556b2f;
-  --border: #4a4631;
-  --shadow: rgba(0, 0, 0, 0.6);
-  --metal-light: #4a4631;
-  --metal-dark: #1f1e10;
+  /* Palette sombre (nuit/olive) - contraste renforce */
+  --bg-primary: #08080a;
+  --bg-secondary: #14140c;
+  --bg-card: #1c1c10;
+  --text-primary: #fff5d0;
+  --text-secondary: #d8c890;
+  --accent: #b8c855;
+  --accent-light: #d8e870;
+  --accent-dark: #8b9a4f;
+  --border: #6b5d3f;
+  --shadow: rgba(0, 0, 0, 0.85);
+  --metal-light: #5a5a3e;
+  --metal-dark: #14140c;
 }
 
 * {
@@ -44,8 +44,12 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Brush Script MT', 'Lucida Handwriting', 'Segoe Script',
-               'Apple Chancery', 'Dancing Script', cursive, serif;
+  font-family: 'Bahnschrift', 'Bahnschrift Condensed', 'Eurostile',
+               'Bank Gothic', 'Tw Cen MT Condensed', 'Impact',
+               'Arial Narrow', 'Helvetica Neue', system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-rendering: optimizeLegibility;
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
@@ -144,9 +148,11 @@ header,
   background: var(--bg-secondary);
   border: 1px solid var(--accent);
   border-radius: 20px;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   transition: all 0.25s;
-  font-weight: bold;
 }
 
 .social-menu a:hover {
@@ -180,8 +186,10 @@ header,
   border: 2px solid var(--accent-dark);
   border-radius: 8px;
   font-family: inherit;
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all 0.25s;
   box-shadow: 0 3px 6px var(--shadow);
@@ -212,14 +220,16 @@ header,
   border-radius: 8px;
   color: #fff;
   font-family: inherit;
-  font-size: 1.05rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   text-decoration: none;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-  border: 2px solid rgba(255,255,255,0.5);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.85);
+  border: 2px solid rgba(255,255,255,0.6);
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
   background: linear-gradient(90deg,
     #ff4d6d 0%,
     #ffaa00 20%,
@@ -352,9 +362,15 @@ header,
    Titres
    ============================================ */
 h1, h2, h3 {
-  font-family: 'Brush Script MT', 'Lucida Handwriting', 'Segoe Script', cursive;
+  font-family: 'Bahnschrift', 'Bahnschrift SemiBold', 'Eurostile', 'Bank Gothic',
+               'Impact', 'Arial Black', 'Helvetica Neue', system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   color: var(--accent-dark);
-  text-shadow: 2px 2px 4px var(--shadow);
+  text-shadow:
+    2px 2px 0 var(--shadow),
+    0 0 6px rgba(0,0,0,0.15);
 }
 
 [data-theme="dark"] h1,
